@@ -21,9 +21,9 @@ export const DetailScreen = ({ route, navigation }: Props) => {
 
     const uri = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
 
-    const {cast, movieFull, isLoading} = useMoviesDetails(movie.id);
+    const { cast, movieFull, isLoading } = useMoviesDetails(movie.id);
 
-    console.log({isLoading});
+    console.log({ isLoading });
 
     return (
         <ScrollView>
@@ -43,24 +43,24 @@ export const DetailScreen = ({ route, navigation }: Props) => {
                 </Text>
             </View>
 
-                {
-                    isLoading ?
-                    <ActivityIndicator size={35} color="grey" style = {{marginTop: 20}}/>
+            {
+                isLoading ?
+                    <ActivityIndicator size={35} color="grey" style={{ marginTop: 20 }} />
                     :
-                    <MovieDetails movieFull={movieFull!} cast={cast}/>
-                }
-        {/* boton de regreso */}
-        <View style={styles.backButton}>
-        <TouchableOpacity
-            onPress={() => navigation.goBack()}
-        >
-                <Icon
-                    name="arrow-back-outline"
-                    color="white"
-                    size={60}
-                />
-        </TouchableOpacity>
-        </View>
+                    <MovieDetails movieFull={movieFull!} cast={cast} />
+            }
+            {/* boton de regreso */}
+            <View style={styles.backButton}>
+                <TouchableOpacity
+                    onPress={() => navigation.goBack()}
+                >
+                    <Icon
+                        name="arrow-undo-outline"
+                        color="white"
+                        size={50}
+                    />
+                </TouchableOpacity>
+            </View>
         </ScrollView>
     );
 };
@@ -99,6 +99,6 @@ const styles = StyleSheet.create({
         elevation: 9,
         position: 'absolute',
         top: 30,
-        left: 5,
+        left: 10,
     },
 });
