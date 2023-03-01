@@ -12,7 +12,7 @@ export const HorizontalSlider = ({ title, movies }: Props) => {
 
     return (
         <View style={{
-        height: (title) ? 260 : 220,
+        height: (title) ? 250 : 220,
         }}>
             {
                 title && <Text style={{ fontSize: 20, fontWeight: 'bold', padding: 5, alignSelf: 'center' }}>{title}</Text>
