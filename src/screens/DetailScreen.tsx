@@ -1,10 +1,12 @@
 import React from 'react';
-import { View, Image, StyleSheet, Dimensions, ScrollView, Text, ActivityIndicator } from 'react-native';
+import { View, Image, StyleSheet, Dimensions, ScrollView, Text, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 // import { Movie, OriginalLanguage } from '../interfaces/movieInterface';
 import { RootStackParams } from '../navigation/Navigation';
 // import Icon from 'react-native-vector-icons/Ionicons';
 import { useMoviesDetails } from '../hooks/useMoviesDetails';
+import { MovieDetails } from '../components/MovieDetails';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const screenHeight = Dimensions.get('window').height;
 
@@ -13,7 +15,7 @@ interface Props extends StackScreenProps<RootStackParams, 'Detail'> {
     route: any;
 }
 
-export const DetailScreen = ({ route }: Props) => {
+export const DetailScreen = ({ route, navigation }: Props) => {
 
     const movie = route.params;
 
@@ -39,8 +41,26 @@ export const DetailScreen = ({ route }: Props) => {
                 <Text style={styles.title}>
                     {movie.title}
                 </Text>
-                <ActivityIndicator size={35} color="grey" style = {{marginTop: 20}}/>
             </View>
+
+                {
+                    isLoading ?
+                    <ActivityIndicator size={35} color="grey" style = {{marginTop: 20}}/>
+                    :
+                    <MovieDetails movieFull={movieFull!} cast={cast}/>
+                }
+        {/* boton de regreso */}
+        <View style={styles.backButton}>
+        <TouchableOpacity
+            onPress={() => navigation.goBack()}
+        >
+                <Icon
+                    name="arrow-back-outline"
+                    color="white"
+                    size={60}
+                />
+        </TouchableOpacity>
+        </View>
         </ScrollView>
     );
 };
@@ -73,5 +93,12 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 23,
         fontWeight: 'bold',
+    },
+    backButton: {
+        zIndex: 999,
+        elevation: 9,
+        position: 'absolute',
+        top: 30,
+        left: 5,
     },
 });
